@@ -51,7 +51,18 @@ window.spinnakerSettings = {
   debugEnabled: debugEnabled,
   defaultCategory: 'serverGroup',
   defaultInstancePort: 80,
-  defaultProviders: ['appengine', 'aws', 'azure', 'cloudfoundry', 'dcos', 'ecs', 'gce', 'kubernetes', 'oracle'],
+  defaultProviders: [
+    'appengine',
+    'aws',
+    'azure',
+    'cloudfoundry',
+    'dcos',
+    'ecs',
+    'gce',
+    'kubernetes',
+    'oracle',
+    'huaweicloud',
+  ],
   defaultTimeZone: process.env.TIMEZONE || 'America/Los_Angeles', // see http://momentjs.com/timezone/docs/#/data-utilities/
   entityTags: {
     maxResults: 5000,
@@ -204,6 +215,12 @@ window.spinnakerSettings = {
         account: 'titustestvpc',
         iamProfile: '{{application}}InstanceProfile',
         region: 'us-east-1',
+      },
+    },
+    huaweicloud: {
+      defaults: {
+        account: 'default',
+        region: 'cn-north-1',
       },
     },
   },
