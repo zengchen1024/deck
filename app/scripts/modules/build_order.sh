@@ -17,6 +17,7 @@ ModuleDeps () {
       kubernetes) echo "core" ;;
       oracle) echo "core" ;;
       titus) echo "amazon docker core" ;;
+      huaweicloud) DEPS="core" ;;
       *)
         echo "Unknown module: ${MODULE}"
         exit -1;

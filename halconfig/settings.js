@@ -103,6 +103,12 @@ var kubernetes = {
     proxy: '{%kubernetes.default.proxy%}',
   },
 };
+var huaweicloud = {
+  defaults: {
+    account: '{%huaweicloud.default.account%}',
+    region: '{%huaweicloud.default.region%}',
+  },
+};
 var oracle = {
   defaults: {
     account: '{%oracle.default.account%}',
@@ -143,6 +149,7 @@ window.spinnakerSettings = {
     'ecs',
     'gce',
     'kubernetes',
+    'huaweicloud',
     'oracle',
     'titus',
   ],
@@ -209,6 +216,7 @@ window.spinnakerSettings = {
     ecs: ecs,
     gce: gce,
     kubernetes: kubernetes,
+    huaweicloud: huaweicloud,
     oracle: oracle,
     titus: {
       defaults: {
