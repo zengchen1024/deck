@@ -26,14 +26,14 @@
               <td>
                 <select
                   class="form-control input-sm"
-                  ng-model="rule.ruleType"
+                  ng-model="rule.protocol"
                   ng-options="protocol as protocol.toUpperCase() for protocol in ['TCP', 'UDP','ICMP']"
                   required
                 ></select>
               </td>
 
-              <!--If ruleType is equal to TCP or UDP-->
-              <td ng-if="rule.ruleType.toUpperCase() === 'TCP' || rule.ruleType.toUpperCase() === 'UDP' ">
+              <!--If protocol is equal to TCP or UDP-->
+              <td ng-if="rule.protocol.toUpperCase() === 'TCP' || rule.protocol.toUpperCase() === 'UDP' ">
                 <input
                   class="form-control input-sm"
                   name="fromPort_{{$index}}"
@@ -44,7 +44,7 @@
                   required
                 />
               </td>
-              <td ng-if="rule.ruleType.toUpperCase() === 'TCP' || rule.ruleType.toUpperCase() === 'UDP' ">
+              <td ng-if="rule.protocol.toUpperCase() === 'TCP' || rule.protocol.toUpperCase() === 'UDP' ">
                 <input
                   class="form-control input-sm"
                   name="toPort_{{$index}}"
@@ -56,8 +56,8 @@
                 />
               </td>
 
-              <!--If ruleType equal to ICMP-->
-              <td ng-if="rule.ruleType.toUpperCase() === 'ICMP' ">
+              <!--If protocol equal to ICMP-->
+              <td ng-if="rule.protocol.toUpperCase() === 'ICMP' ">
                 <input
                   class="form-control input-sm"
                   name="icmpType_{{$index}}"
@@ -70,7 +70,7 @@
                   icmp-index="{{$index}}"
                 />
               </td>
-              <td ng-if="rule.ruleType.toUpperCase() === 'ICMP' ">
+              <td ng-if="rule.protocol.toUpperCase() === 'ICMP' ">
                 <input
                   class="form-control input-sm"
                   name="icmpCode_{{$index}}"

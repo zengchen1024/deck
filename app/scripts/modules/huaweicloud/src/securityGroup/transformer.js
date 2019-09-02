@@ -31,7 +31,7 @@ module.exports = angular
           toPort: 65535,
           prevcidr: '',
           cidr: '',
-          ruleType: 'TCP',
+          protocol: 'TCP',
           remoteSecurityGroupId: '',
           icmpType: -1,
           icmpCode: -1,
@@ -59,7 +59,7 @@ module.exports = angular
               icmpCode: sgRule.protocol.toUpperCase() === 'ICMP' ? sgRule.portRanges[0].endPort : '',
 
               cidr: sgRule.range ? sgRule.range.ip + sgRule.range.cidr : '',
-              ruleType: sgRule.protocol.toUpperCase(),
+              protocol: sgRule.protocol.toUpperCase(),
               prevcidr: sgRule.range ? sgRule.range.ip + sgRule.range.cidr : '',
               remoteSecurityGroupId: sgRule.securityGroup ? sgRule.securityGroup.id : 'CIDR',
             };
