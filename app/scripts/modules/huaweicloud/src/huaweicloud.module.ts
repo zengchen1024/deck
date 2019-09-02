@@ -25,6 +25,10 @@ module(HUAWEICLOUD_MODULE, [
   require('./serverGroup/details/serverGroup.details.module').name,
   require('./instance/huaweicloudInstanceType.service').name,
   require('./instance/details/instance.details.controller').name,
+  require('./securityGroup/securityGroup.reader').name,
+  require('./securityGroup/configure/configure.huaweicloud.module').name,
+  require('./securityGroup/details/details.controller').name,
+  require('./securityGroup/transformer').name,
 ]).config(() => {
   CloudProviderRegistry.registerProvider('huaweicloud', {
     name: 'huaweicloud',
@@ -53,6 +57,14 @@ module(HUAWEICLOUD_MODULE, [
       cloneServerGroupTemplateUrl: require('./serverGroup/configure/wizard/serverGroupWizard.html'),
       detailsController: 'huaweicloudServerGroupDetailsCtrl',
       detailsTemplateUrl: require('./serverGroup/details/serverGroupDetails.html'),
+    },
+    securityGroup: {
+      reader: 'huaweicloudSecurityGroupReader',
+      transformer: 'huaweicloudSecurityGroupTransformer',
+      detailsTemplateUrl: require('./securityGroup/details/details.html'),
+      detailsController: 'huaweicloudSecurityGroupDetailsController',
+      createSecurityGroupTemplateUrl: require('./securityGroup/configure/wizard/createWizard.html'),
+      createSecurityGroupController: 'huaweicloudUpsertSecurityGroupController',
     },
   });
 });

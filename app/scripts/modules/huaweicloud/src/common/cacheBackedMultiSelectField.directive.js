@@ -6,7 +6,7 @@ const angular = require('angular');
 
 module.exports = angular
   .module('spinnaker.huaweicloud.common.cacheBackedMultiSelectField.directive', [])
-  .directive('osCacheBackedMultiSelectField', function() {
+  .directive('huaweicloudCacheBackedMultiSelectField', function() {
     return {
       restrict: 'E',
       templateUrl: require('./cacheBackedMultiSelect.template.html'),
