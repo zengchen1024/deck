@@ -51,6 +51,9 @@ module.exports = angular
       function prepareForEdit(securityGroup) {
         securityGroup.rules =
           _.map(securityGroup.inboundRules, function(sgRule) {
+            if (!sgRule.protocol) {
+              return null;
+            }
             return {
               fromPort: sgRule.protocol.toUpperCase() !== 'ICMP' ? sgRule.portRanges[0].startPort : '',
               toPort: sgRule.protocol.toUpperCase() !== 'ICMP' ? sgRule.portRanges[0].endPort : '',
@@ -63,6 +66,8 @@ module.exports = angular
               prevcidr: sgRule.range ? sgRule.range.ip + sgRule.range.cidr : '',
               remoteSecurityGroupId: sgRule.securityGroup ? sgRule.securityGroup.id : 'CIDR',
             };
+          }).filter(function(e) {
+            return e !== null;
           }) || [];
         securityGroup.account = securityGroup.accountName;
         securityGroup.accountName = undefined;
