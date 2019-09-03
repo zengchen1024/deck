@@ -29,6 +29,9 @@ module(HUAWEICLOUD_MODULE, [
   require('./securityGroup/configure/configure.huaweicloud.module').name,
   require('./securityGroup/details/details.controller').name,
   require('./securityGroup/transformer').name,
+  require('./loadBalancer/configure/configure.huaweicloud.module').name,
+  require('./loadBalancer/details/details.huaweicloud.module').name,
+  require('./loadBalancer/transformer').name,
 ]).config(() => {
   CloudProviderRegistry.registerProvider('huaweicloud', {
     name: 'huaweicloud',
@@ -65,6 +68,13 @@ module(HUAWEICLOUD_MODULE, [
       detailsController: 'huaweicloudSecurityGroupDetailsController',
       createSecurityGroupTemplateUrl: require('./securityGroup/configure/wizard/createWizard.html'),
       createSecurityGroupController: 'huaweicloudUpsertSecurityGroupController',
+    },
+    loadBalancer: {
+      transformer: 'huaweicloudLoadBalancerTransformer',
+      detailsTemplateUrl: require('./loadBalancer/details/details.html'),
+      detailsController: 'huaweicloudLoadBalancerDetailsController',
+      createLoadBalancerTemplateUrl: require('./loadBalancer/configure/wizard/createWizard.html'),
+      createLoadBalancerController: 'huaweicloudUpsertLoadBalancerController',
     },
   });
 });
