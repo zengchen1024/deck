@@ -332,10 +332,6 @@ module.exports = angular
           var accountIndex = allSecurityGroups[serverGroup.account] || {};
           var regionSecurityGroups = accountIndex[serverGroup.region] || {};
           $scope.securityGroups = _.map(serverGroup.launchConfig.securityGroups, sgId => {
-            //TODO(jcwest): remove this once the back-end sends correctly formatted firewall IDs
-            if (new RegExp("^\\[u'").test(sgId)) {
-              sgId = sgId.split("'")[1];
-            }
             return regionSecurityGroups[sgId] || { id: sgId, name: sgId };
           });
         });
