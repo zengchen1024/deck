@@ -32,6 +32,9 @@ module(HUAWEICLOUD_MODULE, [
   require('./loadBalancer/configure/configure.huaweicloud.module').name,
   require('./loadBalancer/details/details.huaweicloud.module').name,
   require('./loadBalancer/transformer').name,
+  require('./pipeline/stages/bake/huaweicloudBakeStage').name,
+  require('./pipeline/stages/findAmi/huaweicloudFindAmiStage').name,
+  require('./pipeline/stages/cloneServerGroup/huaweicloudCloneServerGroupStage').name,
 ]).config(() => {
   CloudProviderRegistry.registerProvider('huaweicloud', {
     name: 'huaweicloud',
