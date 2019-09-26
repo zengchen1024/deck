@@ -122,8 +122,9 @@ module.exports = angular
 
               this.serverGroup = details;
               this.applyAccountDetails(this.serverGroup);
-              this.applySubnetDetails();
-              this.applyFloatingIpDetails();
+              this.applySubnetDetails(this.serverGroup);
+              //this.applyFloatingIpDetails();
+              this.applyVPCDetails(this.serverGroup);
               this.applySecurityGroupDetails(this.serverGroup);
               this.applyLoadBalancerDetails(this.serverGroup);
 
@@ -352,9 +353,34 @@ module.exports = angular
         });
       };
 
-      this.applySubnetDetails = () => {
-        return SubnetReader.getSubnetByIdAndProvider(this.serverGroup.subnetId, 'huaweicloud').then(details => {
-          ctrl.subnetName = (details || {}).name;
+      this.applySubnetDetails = serverGroup => {
+        return SubnetReader.listSubnetsByProvider('huaweicloud').then(allSubnets => {
+          var subnetsMap = {};
+          _.forEach(allSubnets, subnet => {
+            subnetsMap[subnet.id] = subnet;
+          });
+
+          $scope.subnets = _.chain(serverGroup.subnets)
+            .map(subnetId => {
+              return subnetsMap[subnetId];
+            })
+            .compact()
+            .value();
+        });
+      };
+
+      this.applyVPCDetails = serverGroup => {
+        return NetworkReader.listNetworksByProvider('huaweicloud').then(networks => {
+          var vpcName = (
+            _.find(networks, net => {
+              return net.id === serverGroup.vpcId;
+            }) || {}
+          ).name;
+
+          $scope.vpc = {
+            id: serverGroup.vpcId,
+            name: vpcName,
+          };
         });
       };
 

@@ -83,12 +83,20 @@
 
           {{ctrl.serverGroup.region}}
         </dd>
-        <dt>Subnet</dt>
+      </dl>
+    </collapsible-section>
+    <collapsible-section heading="Network" expanded="true">
+      <dl class="horizontal-when-filters-collapsed">
+        <dt>VPC</dt>
         <dd>
-          {{ctrl.subnetName || ctrl.serverGroup.subnetId}}<span ng-if="ctrl.subnetName">
-            ({{ctrl.serverGroup.subnetId}})</span
-          >
+          {{vpc.name}}
         </dd>
+        <dt>Subnets</dt>
+        <ul>
+          <li ng-repeat="subnet in subnets | orderBy:'name'">
+            {{subnet.name}}
+          </li>
+        </ul>
       </dl>
     </collapsible-section>
     <collapsible-section heading="Health" expanded="true">
@@ -103,15 +111,15 @@
       <dl class="dl-horizontal dl-flex">
         <dt>Current</dt>
         <dd>{{ctrl.serverGroup.instances.length}}</dd>
-        <dt ng-if="ctrl.serverGroup.scalingConfig.minSize !== ctrl.serverGroup.scalingConfig.maxSize">Min</dt>
-        <dd ng-if="ctrl.serverGroup.scalingConfig.minSize !== ctrl.serverGroup.scalingConfig.maxSize">
-          {{ctrl.serverGroup.scalingConfig.minSize}}
+        <dt ng-if="ctrl.serverGroup.capacity.min !== ctrl.serverGroup.capacity.max">Min</dt>
+        <dd ng-if="ctrl.serverGroup.capacity.min !== ctrl.serverGroup.capacity.max">
+          {{ctrl.serverGroup.capacity.min}}
         </dd>
         <dt>Desired</dt>
-        <dd>{{ctrl.serverGroup.scalingConfig.desiredSize}}</dd>
-        <dt ng-if="ctrl.serverGroup.scalingConfig.minSize !== ctrl.serverGroup.scalingConfig.maxSize">Max</dt>
-        <dd ng-if="ctrl.serverGroup.scalingConfig.minSize !== ctrl.serverGroup.scalingConfig.maxSize">
-          {{ctrl.serverGroup.scalingConfig.maxSize}}
+        <dd>{{ctrl.serverGroup.capacity.desired}}</dd>
+        <dt ng-if="ctrl.serverGroup.capacity.min !== ctrl.serverGroup.capacity.max">Max</dt>
+        <dd ng-if="ctrl.serverGroup.capacity.min !== ctrl.serverGroup.capacity.max">
+          {{ctrl.serverGroup.capacity.max}}
         </dd>
       </dl>
       <div>
