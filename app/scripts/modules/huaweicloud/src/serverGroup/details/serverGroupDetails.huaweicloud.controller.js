@@ -281,6 +281,7 @@ module.exports = angular
         });
       };
 
+      */
       this.resizeServerGroup = () => {
         $uibModal.open({
           templateUrl: require('./resize/resizeServerGroup.html'),
@@ -292,7 +293,6 @@ module.exports = angular
         });
       };
 
-      */
       this.cloneServerGroup = serverGroup => {
         $uibModal.open({
           templateUrl: require('../configure/wizard/serverGroupWizard.html'),
