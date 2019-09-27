@@ -180,7 +180,7 @@ module.exports = angular
           submitMethod: submitMethod,
           askForReason: true,
           platformHealthOnlyShowOverride: app.attributes.platformHealthOnlyShowOverride,
-          platformHealthType: 'Openstack',
+          platformHealthType: 'HuaweiCloud',
           onTaskComplete: () => {
             if ($state.includes('**.serverGroup', stateParams)) {
               $state.go('^');
@@ -189,7 +189,7 @@ module.exports = angular
         };
 
         if (app.attributes.platformHealthOnlyShowOverride && app.attributes.platformHealthOnly) {
-          confirmationModalParams.interestingHealthProviderNames = ['Openstack'];
+          confirmationModalParams.interestingHealthProviderNames = ['HuaweiCloud'];
         }
 
         ServerGroupWarningMessageService.addDestroyWarningMessage(app, serverGroup, confirmationModalParams);
@@ -206,6 +206,7 @@ module.exports = angular
         };
 
         var submitMethod = params => {
+          params.serverGroupId = serverGroup.groupId;
           return serverGroupWriter.disableServerGroup(serverGroup, app, params);
         };
 
@@ -216,13 +217,13 @@ module.exports = angular
           provider: 'huaweicloud',
           taskMonitorConfig: taskMonitor,
           platformHealthOnlyShowOverride: app.attributes.platformHealthOnlyShowOverride,
-          platformHealthType: 'Openstack',
+          platformHealthType: 'HuaweiCloud',
           submitMethod: submitMethod,
           askForReason: true,
         };
 
         if (app.attributes.platformHealthOnlyShowOverride && app.attributes.platformHealthOnly) {
-          confirmationModalParams.interestingHealthProviderNames = ['Openstack'];
+          confirmationModalParams.interestingHealthProviderNames = ['HuaweiCloud'];
         }
 
         ServerGroupWarningMessageService.addDisableWarningMessage(app, serverGroup, confirmationModalParams);
@@ -239,6 +240,7 @@ module.exports = angular
         };
 
         var submitMethod = params => {
+          params.serverGroupId = serverGroup.groupId;
           return serverGroupWriter.enableServerGroup(serverGroup, app, params);
         };
 
@@ -248,13 +250,13 @@ module.exports = angular
           account: serverGroup.account,
           taskMonitorConfig: taskMonitor,
           platformHealthOnlyShowOverride: app.attributes.platformHealthOnlyShowOverride,
-          platformHealthType: 'Openstack',
+          platformHealthType: 'HuaweiCloud',
           submitMethod: submitMethod,
           askForReason: true,
         };
 
         if (app.attributes.platformHealthOnlyShowOverride && app.attributes.platformHealthOnly) {
-          confirmationModalParams.interestingHealthProviderNames = ['Openstack'];
+          confirmationModalParams.interestingHealthProviderNames = ['HuaweiCloud'];
         }
 
         confirmationModalService.confirm(confirmationModalParams);
