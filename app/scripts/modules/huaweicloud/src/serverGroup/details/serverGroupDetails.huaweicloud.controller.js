@@ -53,7 +53,7 @@ module.exports = angular
       securityGroupReader,
       loadBalancerReader,
       huaweicloudServerGroupTransformer,
-      //overrideRegistry,
+      overrideRegistry,
     ) {
       var ctrl = this;
       this.state = {
@@ -262,7 +262,6 @@ module.exports = angular
         confirmationModalService.confirm(confirmationModalParams);
       };
 
-      /*
       this.rollbackServerGroup = () => {
         $uibModal.open({
           templateUrl: overrideRegistry.getTemplate(
@@ -281,7 +280,6 @@ module.exports = angular
         });
       };
 
-      */
       this.resizeServerGroup = () => {
         $uibModal.open({
           templateUrl: require('./resize/resizeServerGroup.html'),
