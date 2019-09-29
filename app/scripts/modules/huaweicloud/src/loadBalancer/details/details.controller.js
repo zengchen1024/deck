@@ -88,7 +88,7 @@ module.exports = angular
       };
 
       this.deleteLoadBalancer = function deleteLoadBalancer() {
-        if ($scope.loadBalancer.instances && $scope.loadBalancer.instances.length) {
+        if ($scope.loadBalancer.serverGroups && $scope.loadBalancer.serverGroups.length) {
           return;
         }
 
@@ -100,7 +100,7 @@ module.exports = angular
         const command = {
           cloudProvider: 'huaweicloud',
           loadBalancerName: $scope.loadBalancer.name,
-          id: $scope.loadBalancer.id,
+          loadBalancerId: $scope.loadBalancer.id,
           region: $scope.loadBalancer.region,
           account: $scope.loadBalancer.account,
           credentials: $scope.loadBalancer.account,

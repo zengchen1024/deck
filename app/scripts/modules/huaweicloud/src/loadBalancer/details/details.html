@@ -30,15 +30,15 @@
           </button>
           <ul class="dropdown-menu" uib-dropdown-menu role="menu">
             <li><a href ng-click="ctrl.editLoadBalancer()">Edit Load Balancer</a></li>
-            <li ng-if="!loadBalancer.instances.length">
+            <li ng-if="!loadBalancer.serverGroups.length">
               <a href ng-click="ctrl.deleteLoadBalancer()">Delete Load Balancer</a>
             </li>
             <li
-              ng-if="loadBalancer.instances.length"
+              ng-if="loadBalancer.serverGroups.length"
               class="disabled"
-              uib-tooltip="You must detach all instances before you can delete this load balancer."
+              uib-tooltip="You must detach all server groups before you can delete this load balancer."
             >
-              <a href ng-click="ctrl.deleteLoadBalancer()">Delete Load Balancer</a>
+              <a href>Delete Load Balancer</a>
             </li>
           </ul>
         </div>
