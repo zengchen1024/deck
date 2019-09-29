@@ -164,7 +164,10 @@ module.exports = angular
           title: 'Destroying ' + serverGroup.name,
         };
 
-        var submitMethod = params => serverGroupWriter.destroyServerGroup(serverGroup, app, params);
+        var submitMethod = params => {
+          params.serverGroupId = serverGroup.groupId;
+          serverGroupWriter.destroyServerGroup(serverGroup, app, params);
+        };
 
         var stateParams = {
           name: serverGroup.name,
