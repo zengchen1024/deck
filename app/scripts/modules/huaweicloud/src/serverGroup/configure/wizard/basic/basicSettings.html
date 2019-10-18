@@ -1,7 +1,4 @@
-<div
-  class="container-fluid form-horizontal"
-  ng-controller="huaweicloudServerGroupBasicSettingsCtrl as basicSettingsCtrl"
->
+<div class="container-fluid form-horizontal" ng-controller="hwcServerGroupBasicSettingsCtrl as basicSettingsCtrl">
   <ng-form name="basicSettings">
     <div class="form-group" ng-if="!command.viewState.hideClusterNamePreview">
       <div class="col-md-12">
@@ -54,13 +51,13 @@
         ></account-select-field>
       </div>
     </div>
-    <hwc-region-select-field
+    <hwc-region-selector
       account="command.credentials"
       model="command.region"
       help-key="huaweicloud.serverGroup.region"
       read-only="command.viewState.readOnlyFields.region"
       on-change="onRegionSelectedChanged(region)"
-    ></hwc-region-select-field>
+    ></hwc-region-selector>
     <div class="form-group">
       <div class="col-md-3 sm-label-right">
         Stack
@@ -103,12 +100,12 @@
         <span>Only dot(.), underscore(_), and dash(-) special characters are allowed in the Detail field.</span>
       </div>
     </div>
-    <hwc-server-group-config-select-field
+    <hwc-server-group-config-selector
       label="Scaling Config"
       model="command.serverGroupConfigId"
       help-key=""
       filter="configFilter"
-    ></hwc-server-group-config-select-field>
+    ></hwc-server-group-config-selector>
     <deployment-strategy-selector
       ng-if="!command.viewState.disableStrategySelection && command.selectedProvider"
       command="command"

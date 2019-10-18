@@ -5,18 +5,18 @@ const angular = require('angular');
 import { FirewallLabels, SERVER_GROUP_WRITER, TaskMonitor, ModalWizard } from '@spinnaker/core';
 
 module.exports = angular
-  .module('spinnaker.huaweicloud.serverGroup.configure.clone', [
+  .module('spinnaker.huaweicloud.serverGroup.configure.clone.controller', [
     require('@uirouter/angularjs').default,
     SERVER_GROUP_WRITER,
     require('../serverGroupConfiguration.service').name,
   ])
-  .controller('huaweicloudCloneServerGroupCtrl', [
+  .controller('hwcServerGroupCloneCtrl', [
     '$scope',
     '$uibModalInstance',
     '$q',
     '$state',
     'serverGroupWriter',
-    'huaweicloudServerGroupConfigurationService',
+    'hwcServerGroupConfigurationService',
     'serverGroupCommand',
     'application',
     'title',
@@ -26,18 +26,21 @@ module.exports = angular
       $q,
       $state,
       serverGroupWriter,
-      huaweicloudServerGroupConfigurationService,
+      hwcServerGroupConfigurationService,
       serverGroupCommand,
       application,
       title,
     ) {
       $scope.pages = {
-        basicSettings: require('./location/basicSettings.html'),
+        basicSettings: require('./basic/basicSettings.html'),
+        locationSettings: require('./location/locationSettings.html'),
         templateSelection: require('./templateSelection.html'),
-        clusterSettings: require('./clusterSettings.html'),
+        clusterSettings: require('./cluster/clusterSettings.html'),
         instanceSettings: require('./instance/instanceSettings.html'),
-        accessSettings: require('./access/accessSettings.html'),
-        advancedSettings: require('./advanced/advancedSettings.html'),
+        networkSettings: require('./network/networkSettings.html'),
+        loadbalancerSettings: require('./loadbalancer/loadbalancerSettings.html'),
+        healthCheckSettings: require('./healthcheck/healthCheckSettings.html'),
+        otherSettings: require('./other/otherSettings.html'),
       };
 
       $scope.title = title;
@@ -78,7 +81,7 @@ module.exports = angular
       function configureCommand() {
         serverGroupCommand.viewState.contextImages = $scope.contextImages;
         $scope.contextImages = null;
-        huaweicloudServerGroupConfigurationService.configureCommand(application, serverGroupCommand).then(function() {
+        hwcServerGroupConfigurationService.configureCommand(application, serverGroupCommand).then(function() {
           $scope.state.loaded = true;
           initializeWizardState();
           initializeWatches();
@@ -107,7 +110,7 @@ module.exports = angular
       };
 
       this.submit = function() {
-        if ($scope.command.viewState.mode === 'editPipeline' || $scope.command.viewState.mode == 'createPipeline') {
+        if ($scope.command.viewState.mode === 'editPipeline' || $scope.command.viewState.mode === 'createPipeline') {
           return $uibModalInstance.close($scope.command);
         }
         $scope.taskMonitor.submit(function() {

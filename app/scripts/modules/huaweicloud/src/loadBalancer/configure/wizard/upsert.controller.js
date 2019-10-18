@@ -16,9 +16,9 @@ module.exports = angular
   .module('spinnaker.loadBalancer.huaweicloud.create.controller', [
     require('@uirouter/angularjs').default,
     require('../../transformer').name,
-    require('../../../region/regionSelectField.directive').name,
-    require('../../../subnet/subnetSelectField.directive').name,
-    require('../../../network/networkSelectField.directive').name,
+    require('../../../region/regionSelector.directive').name,
+    require('../../../subnet/subnetSelector.directive').name,
+    require('../../../network/networkSelector.directive').name,
     require('../../../common/isolateForm.directive').name,
     SECURITY_GROUP_READER,
   ])

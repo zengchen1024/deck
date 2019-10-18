@@ -1,0 +1,80 @@
+<div
+  class="container-fluid form-horizontal"
+  ng-controller="hwcServerGroupLoadBalancerSettingsCtrl as loadbalancerSettingsCtrl"
+>
+  <div class="modal-body">
+    <ng-form name="loadbalancerSettings" novalidate>
+      <div class="form-group">
+        <div class="col-md-5 sm-label-left">
+          <b>Bind Load Balancer</b>
+          <help-field key=""></help-field>
+        </div>
+        <div class="col-md-2 checkbox">
+          <input type="checkbox" ng-model="lbState.isBindLoadBalancer" />
+        </div>
+      </div>
+
+      <div ng-if="lbState.isBindLoadBalancer" class="form-group">
+        <div class="form-group">
+          <hwc-load-balancer-selector
+            available-l-bs="allLoadBalancers"
+            label="Load Balancer"
+            label-column-size="3"
+            value-column-size="7"
+            model="command.loadBalancers.loadBalancerId"
+            on-change="onLoadBalancerSelectedChanged(loadbalancer)"
+            help-key=""
+          ></hwc-load-balancer-selector>
+        </div>
+
+        <div class="form-group">
+          <hwc-load-balancer-selector
+            available-l-bs="loadBalancerPools"
+            label="Backed ECS Group"
+            label-column-size="3"
+            value-column-size="7"
+            model="command.loadBalancers.loadBalancerPoolId"
+            help-key=""
+          ></hwc-load-balancer-selector>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-3 sm-label-right">
+            Backend Port
+            <help-field key=""></help-field>
+          </div>
+          <div class="col-md-7">
+            <input
+              type="number"
+              min="1"
+              max="65535"
+              required
+              class="form-control input-sm"
+              name="backendPort"
+              ng-model="command.loadBalancers.backendPort"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-3 sm-label-right">
+            Weight
+            <help-field key=""></help-field>
+          </div>
+          <div class="col-md-7">
+            <input
+              type="number"
+              min="0"
+              max="100"
+              required
+              class="form-control input-sm"
+              name="weight"
+              ng-model="command.loadBalancers.weight"
+              ng-init="command.loadBalancers.weight=1"
+            />
+          </div>
+        </div>
+      </div>
+    </ng-form>
+  </div>
+</div>

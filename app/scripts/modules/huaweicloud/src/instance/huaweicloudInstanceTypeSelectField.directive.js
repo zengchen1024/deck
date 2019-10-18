@@ -10,7 +10,7 @@ module.exports = angular
     INSTANCE_TYPE_SERVICE,
     require('../common/selectField.component').name,
   ])
-  .directive('huaweicloudInstanceTypeSelectField', [
+  .directive('hwcInstanceTypeSelectField', [
     'instanceTypeService',
     function(instanceTypeService) {
       return {

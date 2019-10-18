@@ -13,17 +13,11 @@
         task-monitor="taskMonitor"
         dismiss="$dismiss()"
       >
-        <v2-wizard-page key="location" label="Location" hide-subheading="true" done="false" mandatory="true">
+        <v2-wizard-page key="basic" label="Basic" hide-subheading="true" done="false" mandatory="true">
           <ng-include src="pages.basicSettings"></ng-include>
         </v2-wizard-page>
-        <v2-wizard-page
-          key="instance-settings"
-          label="Instance Settings"
-          mark-complete-on-view="false"
-          done="false"
-          mandatory="true"
-        >
-          <ng-include src="pages.instanceSettings"></ng-include>
+        <v2-wizard-page key="location" label="Location" hide-subheading="true" done="false" mandatory="true">
+          <ng-include src="pages.locationSettings"></ng-include>
         </v2-wizard-page>
         <v2-wizard-page
           key="cluster-size"
@@ -34,6 +28,7 @@
         >
           <ng-include src="pages.clusterSettings"></ng-include>
         </v2-wizard-page>
+        <!--
         <v2-wizard-page
           key="access-settings"
           label="Access"
@@ -41,7 +36,6 @@
           done="false"
           mandatory="true"
         >
-          <ng-include src="pages.accessSettings"></ng-include>
         </v2-wizard-page>
         <v2-wizard-page
           key="advanced-settings"
@@ -51,6 +45,46 @@
           mandatory="false"
         >
           <ng-include src="pages.advancedSettings"></ng-include>
+        </v2-wizard-page>
+		-->
+        <v2-wizard-page
+          key="network-settings"
+          label="Network"
+          mark-complete-on-view="false"
+          done="true"
+          mandatory="false"
+        >
+          <ng-include src="pages.networkSettings"></ng-include>
+        </v2-wizard-page>
+        <v2-wizard-page
+          key="load-balancer-settings"
+          label="Load Balancer"
+          mark-complete-on-view="false"
+          done="true"
+          mandatory="false"
+        >
+          <ng-include src="pages.loadbalancerSettings"></ng-include>
+        </v2-wizard-page>
+        <v2-wizard-page
+          key="instance-settings"
+          label="Instance"
+          mark-complete-on-view="true"
+          done="false"
+          mandatory="true"
+        >
+          <ng-include src="pages.instanceSettings"></ng-include>
+        </v2-wizard-page>
+        <v2-wizard-page
+          key="health-check-settings"
+          label="Health Check"
+          mark-complete-on-view="true"
+          done="true"
+          mandatory="false"
+        >
+          <ng-include src="pages.healthCheckSettings"></ng-include>
+        </v2-wizard-page>
+        <v2-wizard-page key="other-settings" label="Other" mark-complete-on-view="false" done="true" mandatory="false">
+          <ng-include src="pages.otherSettings"></ng-include>
         </v2-wizard-page>
       </v2-modal-wizard>
       <div class="modal-footer" ng-if="state.loaded">

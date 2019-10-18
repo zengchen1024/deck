@@ -32,6 +32,7 @@ const helpContents: { [key: string]: string } = {
   'huaweicloud.serverGroup.tags':
     '<p>Key-value pairs of metadata that will be associate to each server group instance.</p>',
   'huaweicloud.serverGroup.schedulerHints': '<p>Key-value pairs for server scheduling hints</p>',
+  'huaweicloud.serverGroup.removeEIP': 'Release EIP when instances are removed from the server group',
 };
 
 Object.keys(helpContents).forEach(key => HelpContentsRegistry.register(key, helpContents[key]));

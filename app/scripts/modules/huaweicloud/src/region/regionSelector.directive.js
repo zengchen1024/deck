@@ -6,11 +6,11 @@ import _ from 'lodash';
 import { AccountService } from '@spinnaker/core';
 
 module.exports = angular
-  .module('spinnaker.huaweicloud.region.regionSelectField.directive', [require('../common/selectField.component').name])
-  .directive('hwcRegionSelectField', function() {
+  .module('spinnaker.huaweicloud.region.selector.directive', [require('../common/selectField.component').name])
+  .directive('hwcRegionSelector', function() {
     return {
       restrict: 'E',
-      templateUrl: require('../common/cacheBackedSelectField.template.html'),
+      templateUrl: require('../common/selectField.template.html'),
       scope: {
         label: '@',
         labelColumnSize: '@',

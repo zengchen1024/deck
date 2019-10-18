@@ -1,40 +1,26 @@
-<div
-  class="container-fluid form-horizontal"
-  ng-controller="huaweicloudServerGroupInstanceSettingsCtrl as instanceSettingsCtrl"
->
-  <ng-form name="instanceSettings">
-    <huaweicloud-instance-type-select-field
-      help-key="huaweicloud.serverGroup.instanceType"
-      model="command.instanceType"
-      account="command.credentials"
-      region="command.region"
-    ></huaweicloud-instance-type-select-field>
-    <div class="form-group" ng-if="!command.viewState.disableImageSelection">
-      <div class="col-md-3 sm-label-right">
-        Image
-        <help-field key="huaweicloud.serverGroup.imageName"></help-field>
+<div class="container-fluid form-horizontal" ng-controller="hwcServerGroupInstanceSettingsCtrl as instanceSettingsCtrl">
+  <div class="modal-body">
+    <ng-form name="instanceSettings" novalidate>
+      <div class="form-group">
+        <hwc-select-field
+          options="instanceRemovalPolicies"
+          label="Instance Removal Policy"
+          label-column-size="3"
+          value-column-size="7"
+          on-change="onInstanceRemovalPolicySelectedChanged(value)"
+          help-key=""
+        ></hwc-select-field>
       </div>
-      <div class="col-md-7">
-        <ui-select
-          ng-model="command.image"
-          name="image"
-          class="form-control input-sm {{image.$error ? 'ng-invalid ng-dirty' : ''}}"
-          required
-        >
-          <ui-select-match placeholder="Search for an image..."
-            >{{$select.selected.name || 'Search for an image...'}}</ui-select-match
-          >
-          <ui-select-choices
-            repeat="result.id as result in command.backingData.filtered.images track by $index"
-            refresh="instanceSettingsCtrl.searchImages($select.search)"
-            ui-disable-choice="result.message"
-            reset-search-input="false"
-          >
-            <span ng-bind-html="result.message"></span>
-            <span ng-bind-html="result.name | highlight: $select.search"></span>
-          </ui-select-choices>
-        </ui-select>
+
+      <div class="form-group">
+        <div class="col-md-5 sm-label-left">
+          <b>Release EIP</b>
+          <help-field key="huaweicloud.serverGroup.removeEIP"></help-field>
+        </div>
+        <div class="col-md-2 checkbox">
+          <input type="checkbox" ng-model="command.deleteEIP" />
+        </div>
       </div>
-    </div>
-  </ng-form>
+    </ng-form>
+  </div>
 </div>

@@ -4,11 +4,11 @@
     <help-field ng-if="$ctrl.helpKey" key="{{ $ctrl.helpKey }}"></help-field>
   </div>
   <div class="col-md-{{ $ctrl.valueColumnSize }}" ng-if="!($ctrl.options && $ctrl.options.length)">
-    {{ noOptionsMessage }}
+    {{ $ctrl.noOptionsMessage }}
   </div>
   <div class="col-md-{{ $ctrl.valueColumnSize }}" ng-if="$ctrl.options && $ctrl.options.length">
     <p ng-if="$ctrl.readOnly" class="form-control-static">
-      {{ selectedOption ? selectedOption.label : noSelectionMessage }}
+      {{ selectedOption ? selectedOption.label : $ctrl.noSelectionMessage }}
     </p>
     <select
       class="form-control input-sm"

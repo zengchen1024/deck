@@ -5,12 +5,12 @@ const angular = require('angular');
 import { ModalWizard } from '@spinnaker/core';
 
 module.exports = angular
-  .module('spinnaker.serverGroup.configure.huaweicloud.basicSettings', [
+  .module('spinnaker.huaweicloud.serverGroup.configure.wizard.basicSettings.controller', [
     require('@uirouter/angularjs').default,
     require('angular-ui-bootstrap'),
-    require('../../../../serverGroup/serverGroupConfigSelectField.directive').name,
+    require('../../../../serverGroup/serverGroupConfigSelector.directive').name,
   ])
-  .controller('huaweicloudServerGroupBasicSettingsCtrl', [
+  .controller('hwcServerGroupBasicSettingsCtrl', [
     '$scope',
     '$controller',
     '$uibModalStack',

@@ -17,7 +17,7 @@ module.exports = angular
     SECURITY_GROUP_READER,
     CACHE_INITIALIZER_SERVICE,
   ])
-  .factory('huaweicloudServerGroupConfigurationService', [
+  .factory('hwcServerGroupConfigurationService', [
     '$q',
     'huaweicloudImageReader',
     'securityGroupReader',

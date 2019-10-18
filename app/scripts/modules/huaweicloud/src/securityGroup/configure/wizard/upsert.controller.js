@@ -15,7 +15,7 @@ module.exports = angular
   .module('spinnaker.securityGroup.huaweicloud.create.controller', [
     require('@uirouter/angularjs').default,
     SECURITY_GROUP_READER,
-    require('../../../region/regionSelectField.directive').name,
+    require('../../../region/regionSelector.directive').name,
     require('../../transformer').name,
   ])
   .controller('huaweicloudUpsertSecurityGroupController', [

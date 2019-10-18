@@ -59,27 +59,28 @@ function SelectFieldController($scope, $element, $attrs, $timeout, $q, $rootScop
     ctrl.refreshing = false;
   }
 
-  var stopWatchingRefreshTime = ctrl.backingCache
-    ? $rootScope.$watch(
-        function() {
-          return InfrastructureCaches.get(ctrl.backingCache).getStats().ageMax;
-        },
-        function(ageMax) {
-          if (ageMax) {
-            ctrl.lastRefresh = ageMax;
+  var stopWatchingRefreshTime =
+    ctrl.backingCache && InfrastructureCaches.get(ctrl.backingCache)
+      ? $rootScope.$watch(
+          function() {
+            return InfrastructureCaches.get(ctrl.backingCache).getStats().ageMax;
+          },
+          function(ageMax) {
+            if (ageMax) {
+              ctrl.lastRefresh = ageMax;
 
-            //update options, but don't start an infinite loop since fetching the options can also update ageMax
-            if (!ctrl.updatingOptions && ageMax > coveredThreshold) {
-              updateOptions();
+              //update options, but don't start an infinite loop since fetching the options can also update ageMax
+              if (!ctrl.updatingOptions && ageMax > coveredThreshold) {
+                updateOptions();
+              }
             }
-          }
-        },
-      )
-    : angular.noop;
+          },
+        )
+      : angular.noop;
 
   this.refresh = function() {
     ctrl.refreshing = true;
-    if (ctrl.backingCache) {
+    if (ctrl.backingCache && InfrastructureCaches.get(ctrl.backingCache)) {
       cacheInitializer.refreshCache(ctrl.backingCache).then(clearRefreshingFlag, clearRefreshingFlag);
     } else {
       updateOptions();
@@ -122,7 +123,7 @@ function SelectFieldController($scope, $element, $attrs, $timeout, $q, $rootScop
   $scope.$on('updateOptions', updateOptions);
 }
 
-module.exports = angular.module('spinnaker.huaweicloud.common.selectField', []).component('selectField', {
+module.exports = angular.module('spinnaker.huaweicloud.common.selectField.component', []).component('hwcSelectField', {
   templateUrl: require('./selectField.component.html'),
   controller: SelectFieldController,
   bindings: {

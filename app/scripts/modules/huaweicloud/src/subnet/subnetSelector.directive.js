@@ -3,16 +3,14 @@
 const angular = require('angular');
 import _ from 'lodash';
 
-import { NetworkReader } from '@spinnaker/core';
+import { SubnetReader } from '@spinnaker/core';
 
 module.exports = angular
-  .module('spinnaker.huaweicloud.network.networkSelectField.directive', [
-    require('../common/selectField.component').name,
-  ])
-  .directive('networkSelectField', function() {
+  .module('spinnaker.huaweicloud.subnet.selector.directive', [require('../common/selectField.component').name])
+  .directive('hwcSubnetSelector', function() {
     return {
       restrict: 'E',
-      templateUrl: require('../common/cacheBackedSelectField.template.html'),
+      templateUrl: require('../common/selectField.template.html'),
       scope: {
         label: '@',
         labelColumnSize: '@',
@@ -27,18 +25,19 @@ module.exports = angular
       },
       link: function(scope) {
         _.defaults(scope, {
-          label: 'Network',
+          label: 'Subnet',
           labelColumnSize: 3,
           valueColumnSize: 7,
-          options: [],
-          backingCache: 'networks',
+          options: [{ label: scope.model, value: scope.model }],
+          filter: {},
+          backingCache: 'subnets',
 
           updateOptions: function() {
-            return NetworkReader.listNetworksByProvider('huaweicloud').then(function(networks) {
-              scope.options = _.chain(networks)
+            return SubnetReader.listSubnetsByProvider('huaweicloud').then(function(subnets) {
+              scope.options = _.chain(subnets)
                 .filter(scope.filter || {})
-                .map(function(a) {
-                  return { label: a.name, value: a.id };
+                .map(function(s) {
+                  return { label: s.name, value: s.id };
                 })
                 .sortBy(function(o) {
                   return o.label;
@@ -52,15 +51,18 @@ module.exports = angular
           onValueChanged: function(newValue) {
             scope.model = newValue;
             if (scope.onChange) {
-              scope.onChange({ network: newValue });
+              scope.onChange({ subnet: newValue });
             }
           },
         });
 
-        scope.$watch('filter', function() {
-          scope.$broadcast('onValueChanged');
-          scope.updateOptions();
-        });
+        scope.$watch(
+          'filter',
+          function() {
+            scope.$broadcast('updateOptions');
+          },
+          true,
+        );
       },
     };
   });

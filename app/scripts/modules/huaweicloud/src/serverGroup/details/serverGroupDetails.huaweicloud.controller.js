@@ -16,7 +16,7 @@ import {
   SubnetReader,
 } from '@spinnaker/core';
 
-require('../configure/serverGroup.configure.huaweicloud.module');
+require('../configure/serverGroup.configure.module');
 
 module.exports = angular
   .module('spinnaker.serverGroup.details.huaweicloud.controller', [
@@ -25,34 +25,34 @@ module.exports = angular
     SERVER_GROUP_WRITER,
     SECURITY_GROUP_READER,
     OVERRIDE_REGISTRY,
-    require('../configure/ServerGroupCommandBuilder').name,
-    require('../serverGroup.transformer').name,
+    require('../configure/serverGroupCommandBuilder.service').name,
+    require('../serverGroupTransformer.service').name,
   ])
   .controller('huaweicloudServerGroupDetailsCtrl', [
     '$scope',
     '$state',
     'app',
     'serverGroup',
-    'huaweicloudServerGroupCommandBuilder',
+    'hwcServerGroupCommandBuilder',
     '$uibModal',
     'confirmationModalService',
     'serverGroupWriter',
     'securityGroupReader',
     'loadBalancerReader',
-    'huaweicloudServerGroupTransformer',
+    'hwcServerGroupTransformer',
     'overrideRegistry',
     function(
       $scope,
       $state,
       app,
       serverGroup,
-      huaweicloudServerGroupCommandBuilder,
+      hwcServerGroupCommandBuilder,
       $uibModal,
       confirmationModalService,
       serverGroupWriter,
       securityGroupReader,
       loadBalancerReader,
-      huaweicloudServerGroupTransformer,
+      hwcServerGroupTransformer,
       overrideRegistry,
     ) {
       var ctrl = this;
@@ -118,7 +118,7 @@ module.exports = angular
                 details.account = serverGroup.accountId;
               }
 
-              huaweicloudServerGroupTransformer.normalizeServerGroup(details);
+              hwcServerGroupTransformer.normalizeServerGroup(details);
 
               this.serverGroup = details;
               this.applyAccountDetails(this.serverGroup);
@@ -297,13 +297,13 @@ module.exports = angular
       this.cloneServerGroup = serverGroup => {
         $uibModal.open({
           templateUrl: require('../configure/wizard/serverGroupWizard.html'),
-          controller: 'huaweicloudCloneServerGroupCtrl as ctrl',
+          controller: 'hwcServerGroupCloneCtrl as ctrl',
           size: 'lg',
           resolve: {
             title: () => 'Clone ' + serverGroup.name,
             application: () => app,
             serverGroupCommand: () =>
-              huaweicloudServerGroupCommandBuilder.buildServerGroupCommandFromExisting(app, serverGroup),
+              hwcServerGroupCommandBuilder.buildServerGroupCommandFromExisting(app, serverGroup),
           },
         });
       };
