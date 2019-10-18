@@ -7,7 +7,7 @@ import { AccountService } from '@spinnaker/core';
 
 module.exports = angular
   .module('spinnaker.huaweicloud.region.regionSelectField.directive', [require('../common/selectField.component').name])
-  .directive('osRegionSelectField', function() {
+  .directive('hwcRegionSelectField', function() {
     return {
       restrict: 'E',
       templateUrl: require('../common/cacheBackedSelectField.template.html'),
@@ -16,7 +16,6 @@ module.exports = angular
         labelColumnSize: '@',
         helpKey: '@',
         model: '=',
-        filter: '=',
         account: '<',
         onChange: '&',
         readOnly: '<',
@@ -30,8 +29,7 @@ module.exports = angular
           labelColumnSize: 3,
           valueColumnSize: 7,
           options: [{ label: scope.model, value: scope.model }],
-          filter: {},
-          backingCache: 'regions',
+          //backingCache: 'regions',
           updateOptions: function() {
             return AccountService.getRegionsForAccount(scope.account).then(function(regions) {
               scope.options = _.chain(regions)
