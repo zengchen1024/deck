@@ -19,7 +19,7 @@ import {
 require('../configure/serverGroup.configure.module');
 
 module.exports = angular
-  .module('spinnaker.serverGroup.details.huaweicloud.controller', [
+  .module('spinnaker.huaweicloud.serverGroup.details.controller', [
     require('@uirouter/angularjs').default,
     CONFIRMATION_MODAL_SERVICE,
     SERVER_GROUP_WRITER,
@@ -28,7 +28,7 @@ module.exports = angular
     require('../configure/serverGroupCommandBuilder.service').name,
     require('../serverGroupTransformer.service').name,
   ])
-  .controller('huaweicloudServerGroupDetailsCtrl', [
+  .controller('hwcServerGroupDetailsCtrl', [
     '$scope',
     '$state',
     'app',
@@ -118,7 +118,9 @@ module.exports = angular
                 details.account = serverGroup.accountId;
               }
 
-              hwcServerGroupTransformer.normalizeServerGroup(details);
+              // normalizeServerGroup is useless, because it just convert load balancers id and names
+              // but, it is a good hook to do more work
+              // hwcServerGroupTransformer.normalizeServerGroup(details);
 
               this.serverGroup = details;
               this.applyAccountDetails(this.serverGroup);
@@ -166,7 +168,7 @@ module.exports = angular
 
         var submitMethod = params => {
           params.serverGroupId = serverGroup.groupId;
-          serverGroupWriter.destroyServerGroup(serverGroup, app, params);
+          return serverGroupWriter.destroyServerGroup(serverGroup, app, params);
         };
 
         var stateParams = {
@@ -345,11 +347,11 @@ module.exports = angular
         return loadBalancerReader.loadLoadBalancers(app.name).then(allLoadBalancers => {
           var lbIndex = {};
           _.forEach(allLoadBalancers, lb => {
-            lbIndex[lb.name] = lb;
+            lbIndex[lb.id] = lb;
           });
           $scope.loadBalancers = _.chain(serverGroup.loadBalancers)
-            .map(lbName => {
-              return lbIndex[lbName];
+            .map(lbId => {
+              return lbIndex[lbId];
             })
             .compact()
             .value();

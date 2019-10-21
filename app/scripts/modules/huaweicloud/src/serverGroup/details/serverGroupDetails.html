@@ -47,7 +47,19 @@
                 Enable
               </a>
             </li>
-            <li><a href ng-click="ctrl.destroyServerGroup()">Destroy</a></li>
+
+            <li ng-if="!ctrl.serverGroup.instances.length">
+              <a href ng-click="ctrl.destroyServerGroup()">Destroy</a>
+            </li>
+            <li
+              ng-if="ctrl.serverGroup.instances.length"
+              class="disabled"
+              uib-tooltip="You must detach all instances before deleting this server group by resizing the desired instance number to 0."
+            >
+              <a href>Destroy</a>
+            </li>
+
+            <!--<li><a href ng-click="ctrl.destroyServerGroup()">Destroy</a></li>-->
             <li><a href ng-click="ctrl.cloneServerGroup(ctrl.serverGroup)">Clone</a></li>
             <!--<li><migrator application="ctrl.application" server-group="ctrl.serverGroup"></migrator></li>-->
           </ul>
@@ -195,11 +207,13 @@
         <dd ng-repeat-end>{{value}}</dd>
       </dl>
     </collapsible-section>
+    <!--
     <collapsible-section heading="Logs">
       <ul>
         <li>TBD</li>
       </ul>
     </collapsible-section>
+    -->
     <collapsible-section heading="User Data">
       <dl class="horizontal-when-filters-collapsed">
         <dt>User Data</dt>
