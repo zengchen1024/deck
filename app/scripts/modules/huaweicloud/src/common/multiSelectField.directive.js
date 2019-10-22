@@ -15,12 +15,14 @@ module.exports = angular
         refreshCache: '=',
         label: '@',
         resetting: '<',
+        model: '=',
         onChange: '&',
         required: '<?',
       },
       link: function(scope) {
         _.defaults(scope, {
-          state: { selectedOptions: [] },
+          initValue: scope.model,
+          state: { selectedOptions: scope.model },
           refreshTooltipLabel: scope.label,
           refreshTooltipTemplate: require('./cacheRefresh.tooltip.html'),
           cache: [],
@@ -36,12 +38,14 @@ module.exports = angular
               scope.onChange(args);
             }
           },
-	  */
+          */
         });
 
         // the on-select event of ui-select may doesn't work when it works on multiple model.
         // so, it needs to watch the selected options to get the new selected result.
         scope.$watch('state.selectedOptions', function() {
+          scope.model = scope.state.selectedOptions;
+
           if (scope.onChange) {
             var args = { selection: scope.state.selectedOptions };
             scope.onChange(args);
@@ -52,8 +56,25 @@ module.exports = angular
           scope.state.selectedOptions = [];
         });
 
+        function includedAllInitValue() {
+          if (_.isEmpty(scope.initValue)) {
+            return false;
+          }
+
+          var values = _.intersection(_.map(scope.options, 'id'), scope.initValue);
+          if (_.isEmpty(values)) {
+            return false;
+          }
+
+          var diff = _.difference(values, scope.initValue);
+          return _.isEmpty(diff);
+        }
+
         function updateOptions() {
           scope.options = _.sortBy(scope.cache, 'name');
+          if (includedAllInitValue()) {
+            scope.state.selectedOptions = scope.initValue;
+          }
         }
 
         scope.$watch('cache', updateOptions);

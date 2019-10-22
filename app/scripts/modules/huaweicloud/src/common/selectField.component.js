@@ -10,6 +10,7 @@ SelectFieldController.$inject = ['$scope', '$element', '$attrs', '$timeout', '$q
 function SelectFieldController($scope, $element, $attrs, $timeout, $q, $rootScope, cacheInitializer) {
   var ctrl = this;
   var coveredThreshold = 0;
+  var initValue = ctrl.value;
 
   this.refreshTooltipTemplate = require('./refresh.tooltip.html');
 
@@ -33,9 +34,15 @@ function SelectFieldController($scope, $element, $attrs, $timeout, $q, $rootScop
       //No selection required or there are no options to choose from - leave as undefined
       ctrl.value = undefined;
     } else {
-      //set to the first value in the list
-      $scope.selectedOption = ctrl.options[0];
-      ctrl.value = ctrl.options[0].value;
+      var option = findOptionByValue(initValue);
+      if (option) {
+        $scope.selectedOption = option;
+        ctrl.value = option.value;
+      } else {
+        //set to the first value in the list
+        $scope.selectedOption = ctrl.options[0];
+        ctrl.value = ctrl.options[0].value;
+      }
     }
 
     if (previousSelection !== ctrl.value) {
