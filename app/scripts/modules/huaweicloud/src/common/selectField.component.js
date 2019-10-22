@@ -38,6 +38,7 @@ function SelectFieldController($scope, $element, $attrs, $timeout, $q, $rootScop
       if (option) {
         $scope.selectedOption = option;
         ctrl.value = option.value;
+        initValue = undefined;
       } else {
         //set to the first value in the list
         $scope.selectedOption = ctrl.options[0];

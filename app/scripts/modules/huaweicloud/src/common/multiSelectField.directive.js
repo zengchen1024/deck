@@ -74,6 +74,7 @@ module.exports = angular
           scope.options = _.sortBy(scope.cache, 'name');
           if (includedAllInitValue()) {
             scope.state.selectedOptions = scope.initValue;
+            scope.initValue = null;
           }
         }
 
