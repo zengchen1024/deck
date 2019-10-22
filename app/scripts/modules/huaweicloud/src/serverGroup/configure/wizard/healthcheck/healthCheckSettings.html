@@ -11,6 +11,7 @@
           label-column-size="3"
           value-column-size="7"
           on-change="onCheckWaySelectedChanged(value)"
+          value="command.healthCheckWay"
           help-key=""
         ></hwc-select-field>
       </div>
@@ -22,6 +23,7 @@
           label-column-size="3"
           value-column-size="7"
           on-change="onCheckIntervalSelectedChanged(value)"
+          value="command.healthCheckInterval"
           help-key=""
         ></hwc-select-field>
       </div>
@@ -39,7 +41,6 @@
             class="form-control input-sm"
             name="checkGracePeriod"
             ng-model="command.healthCheckGracePeriod"
-            ng-init="command.healthCheckGracePeriod=600"
           />
         </div>
       </div>

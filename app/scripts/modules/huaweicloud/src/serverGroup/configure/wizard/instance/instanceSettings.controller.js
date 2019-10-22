@@ -21,5 +21,9 @@ module.exports = angular
       $scope.onInstanceRemovalPolicySelectedChanged = function(policy) {
         $scope.command.instanceRemovePolicy = policy;
       };
+
+      if (!$scope.command.hasOwnProperty('instanceRemovePolicy')) {
+        $scope.command.instanceRemovePolicy = $scope.instanceRemovalPolicies[0].value;
+      }
     },
   ]);

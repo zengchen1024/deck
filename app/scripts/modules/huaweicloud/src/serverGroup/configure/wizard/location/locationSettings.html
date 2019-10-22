@@ -2,15 +2,8 @@
   <div class="modal-body">
     <ng-form name="locationSettings" novalidate>
       <div class="form-group">
-        <hwc-multi-select-field
-          label="Zones"
-          cache="allAvailabilityZones"
-          refresh-cache="updateAvailabilityZones"
-          required="false"
-          resetting="resetting"
-          on-change="onAZSelectedChanged(selection)"
-        >
-        </hwc-multi-select-field>
+        <hwc-az-multi-selector label="Zones" zone-options="allAvailabilityZones" required="true" model="command.zones">
+        </hwc-az-multi-selector>
       </div>
 
       <div class="form-group">
@@ -25,7 +18,6 @@
               name="multiAZPriorityPolicy"
               ng-model="command.multiAZPriorityPolicy"
               value="EQUILIBRIUM_DISTRIBUTE"
-              ng-init="command.multiAZPriorityPolicy='EQUILIBRIUM_DISTRIBUTE'"
             />
             Load-balanced
           </label>

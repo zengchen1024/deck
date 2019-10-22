@@ -97,7 +97,6 @@ module.exports = angular
         var mode = serverGroupCommand.viewState.mode;
         if (mode === 'clone' || mode === 'editPipeline') {
           ModalWizard.markComplete('location');
-          ModalWizard.markComplete('access-settings');
         }
       }
 

@@ -61,7 +61,7 @@ module(HUAWEICLOUD_MODULE, [
       configurationService: 'hwcServerGroupConfigurationService',
       cloneServerGroupController: 'hwcServerGroupCloneCtrl',
       cloneServerGroupTemplateUrl: require('./serverGroup/configure/wizard/serverGroupWizard.html'),
-      detailsController: 'huaweicloudServerGroupDetailsCtrl',
+      detailsController: 'hwcServerGroupDetailsCtrl',
       detailsTemplateUrl: require('./serverGroup/details/serverGroupDetails.html'),
     },
     securityGroup: {

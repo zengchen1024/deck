@@ -12,7 +12,10 @@ module.exports = angular
     '$scope',
     function($scope) {
       $scope.lbState = {
-        isBindLoadBalancer: false,
+        isBindLoadBalancer:
+          $scope.command.hasOwnProperty('loadBalancers') &&
+          $scope.command.loadBalancers &&
+          $scope.command.loadBalancers.length,
       };
 
       function updateLoadBalancers() {

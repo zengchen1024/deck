@@ -5,11 +5,12 @@ import _ from 'lodash';
 const angular = require('angular');
 
 module.exports = angular
-  .module('spinnaker.huaweicloud.serverGroup.transformer', [])
-  .factory('huaweicloudServerGroupTransformer', [
+  .module('spinnaker.huaweicloud.serverGroup.transformer.service', [])
+  .factory('hwcServerGroupTransformer', [
     '$q',
     function($q) {
       function normalizeServerGroup(serverGroup) {
+        /*
         if (serverGroup.loadBalancers) {
           serverGroup.loadBalancerIds = _.map(serverGroup.loadBalancers, function(lb) {
             return /^huaweicloud:/.test(lb) ? lb.split(':')[4] : lb;
@@ -18,6 +19,7 @@ module.exports = angular
             return /^huaweicloud:/.test(lb) ? lb.split(':')[5] : lb;
           });
         }
+        */
 
         return $q.when(serverGroup); // no-op
       }
@@ -39,7 +41,14 @@ module.exports = angular
           'freeFormDetails',
           'userDataType',
           'userData',
+          'loadBalancers',
         );
+        params.loadBalancers = _.isEmpty(base.loadBalancers)
+          ? []
+          : Array.isArray(base.loadBalancers)
+          ? base.loadBalancers
+          : [base.loadBalancers];
+
         var command = {
           type: base.type,
           application: base.application,

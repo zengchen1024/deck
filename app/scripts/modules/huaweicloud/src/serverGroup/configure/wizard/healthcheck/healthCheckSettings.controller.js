@@ -28,5 +28,17 @@ module.exports = angular
       $scope.onCheckIntervalSelectedChanged = function(interval) {
         $scope.command.healthCheckInterval = Number(interval);
       };
+
+      if (!$scope.command.hasOwnProperty('healthCheckWay')) {
+        $scope.command.healthCheckWay = $scope.checkWayOptions[0].value;
+      }
+
+      if (!$scope.command.hasOwnProperty('healthCheckInterval')) {
+        $scope.command.healthCheckInterval = $scope.checkIntervalOptions[0].value;
+      }
+
+      if (!$scope.command.hasOwnProperty('healthCheckGracePeriod') || $scope.command.healthCheckGracePeriod < 1) {
+        $scope.command.healthCheckGracePeriod = 600;
+      }
     },
   ]);

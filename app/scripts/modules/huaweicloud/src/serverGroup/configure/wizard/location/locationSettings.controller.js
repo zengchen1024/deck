@@ -6,41 +6,31 @@ module.exports = angular
   .module('spinnaker.huaweicloud.serverGroup.configure.wizard.locationSettings.controller', [
     require('@uirouter/angularjs').default,
     require('angular-ui-bootstrap'),
-    require('../../../../common/multiSelectField.directive').name,
+    require('../../../../availableZone/azMultiSelector.directive').name,
   ])
   .controller('hwcServerGroupLocationSettingsCtrl', [
     '$scope',
     function($scope) {
-      $scope.resetting = false;
+      var azPolicyOptions = ['EQUILIBRIUM_DISTRIBUTE', 'PICK_FIRST'];
+      if (
+        !$scope.command.hasOwnProperty('multiAZPriorityPolicy') ||
+        azPolicyOptions.indexOf($scope.command.multiAZPriorityPolicy) == -1
+      ) {
+        $scope.command.multiAZPriorityPolicy = 'EQUILIBRIUM_DISTRIBUTE';
+      }
 
       $scope.allAvailabilityZones = [];
-
-      $scope.updateAvailabilityZones = function() {
-        $scope.allAvailabilityZones = getAvailabilityZones();
-      };
-
-      $scope.onAZSelectedChanged = function(selection) {
-        $scope.command.zones = selection;
-      };
-
-      $scope.$watch('command.credentials', reset);
-      $scope.$watch('command.region', reset);
 
       // TODO now, it needs to watch the result of getAvailabilityZones,
       // otherwise it has to refresh manually to get available zones
       $scope.$watch(
         function() {
-          return _.map(getAvailabilityZones(), 'id').join(',');
+          return getAvailabilityZones().join(',');
         },
         function() {
-          $scope.updateAvailabilityZones();
+          $scope.allAvailabilityZones = getAvailabilityZones();
         },
       );
-
-      function reset() {
-        $scope.resetting = !$scope.resetting;
-        $scope.updateAvailabilityZones();
-      }
 
       function getAvailabilityZones() {
         var account = $scope.command.credentials;
@@ -48,14 +38,11 @@ module.exports = angular
         if (!account || !region) {
           return [];
         }
-        var ids = _.get(
+        return _.get(
           $scope.command,
           ['backingData', 'credentialsKeyedByAccount', account, 'regionToZones', region],
           [],
         );
-        return ids.map(i => {
-          return { id: i, name: i };
-        });
       }
     },
   ]);

@@ -42,7 +42,6 @@ module.exports = angular
           },
 
           onSelectedValueChanged: function(selection) {
-            scope.model = selection;
             if (scope.onChange) {
               scope.onChange({ subnets: selection });
             }
