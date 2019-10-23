@@ -16,7 +16,7 @@ module.exports = angular
           labelColumnSize: '@',
           helpKey: '@',
           model: '=',
-          availableLBs: '<',
+          availableLbs: '<',
           onChange: '&',
           readOnly: '=',
           allowNoSelection: '=',
@@ -30,7 +30,7 @@ module.exports = angular
             valueColumnSize: 7,
             options: [],
             updateOptions: function() {
-              scope.options = _.map(scope.availableLBs, function(item) {
+              scope.options = _.map(scope.availableLbs, function(item) {
                 return { label: item.name, value: item.id };
               });
               return $q.when(scope.options);
@@ -45,7 +45,7 @@ module.exports = angular
           });
 
           scope.$watch(
-            'availableLBs',
+            'availableLbs',
             function() {
               scope.$broadcast('updateOptions');
             },

@@ -17,7 +17,7 @@
       <div ng-if="lbState.isBindLoadBalancer" class="form-group">
         <div class="form-group">
           <hwc-load-balancer-selector
-            available-l-bs="allLoadBalancers"
+            available-lbs="allLoadBalancers"
             label="Load Balancer"
             label-column-size="3"
             value-column-size="7"
@@ -29,7 +29,7 @@
 
         <div class="form-group">
           <hwc-load-balancer-selector
-            available-l-bs="loadBalancerPools"
+            available-lbs="loadBalancerPools"
             label="Backed ECS Group"
             label-column-size="3"
             value-column-size="7"
@@ -70,7 +70,6 @@
               class="form-control input-sm"
               name="weight"
               ng-model="command.loadBalancers.weight"
-              ng-init="command.loadBalancers.weight=1"
             />
           </div>
         </div>

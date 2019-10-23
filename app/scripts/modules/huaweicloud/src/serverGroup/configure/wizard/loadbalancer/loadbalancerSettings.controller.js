@@ -12,11 +12,13 @@ module.exports = angular
     '$scope',
     function($scope) {
       $scope.lbState = {
-        isBindLoadBalancer:
-          $scope.command.hasOwnProperty('loadBalancers') &&
-          $scope.command.loadBalancers &&
-          $scope.command.loadBalancers.length,
+        isBindLoadBalancer: $scope.command.hasOwnProperty('loadBalancers') && !_.isEmpty($scope.command.loadBalancers),
       };
+
+      if (!$scope.lbState.isBindLoadBalancer) {
+        $scope.command.loadBalancers = {};
+        $scope.command.healthCheckGracePeriod = 1;
+      }
 
       function updateLoadBalancers() {
         var filter = {
