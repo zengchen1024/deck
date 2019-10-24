@@ -1,13 +1,13 @@
 <ng-form class="container-fluid form-horizontal" name="interfaceForm">
   <div class="modal-body">
-    <network-select-field
+    <hwc-network-selector
       model="loadBalancer.networkId"
       help-key="huaweicloud.loadBalancer.network"
       read-only="!isNew"
       allow-no-selection="true"
       filter="{ account: loadBalancer.account }"
     >
-    </network-select-field>
+    </hwc-network-selector>
 
     <huaweicloud-cache-backed-multi-select-field
       label="{{firewallsLabel}}"

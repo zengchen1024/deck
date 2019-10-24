@@ -13,7 +13,7 @@ import {
 import '../../loadBalancer.less';
 
 module.exports = angular
-  .module('spinnaker.loadBalancer.huaweicloud.create.controller', [
+  .module('spinnaker.huaweicloud.loadBalancer.configure.upsert.controller', [
     require('@uirouter/angularjs').default,
     require('../../transformer').name,
     require('../../../region/regionSelector.directive').name,
@@ -22,7 +22,7 @@ module.exports = angular
     require('../../../common/isolateForm.directive').name,
     SECURITY_GROUP_READER,
   ])
-  .controller('huaweicloudUpsertLoadBalancerController', [
+  .controller('hwcLoadBalancerUpsertController', [
     '$scope',
     '$uibModalInstance',
     '$state',

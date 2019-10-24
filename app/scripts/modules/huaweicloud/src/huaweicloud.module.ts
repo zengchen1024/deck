@@ -29,8 +29,8 @@ module(HUAWEICLOUD_MODULE, [
   require('./securityGroup/configure/configure.huaweicloud.module').name,
   require('./securityGroup/details/details.controller').name,
   require('./securityGroup/transformer').name,
-  require('./loadBalancer/configure/configure.huaweicloud.module').name,
-  require('./loadBalancer/details/details.huaweicloud.module').name,
+  require('./loadBalancer/configure/loadBalancer.configure.module').name,
+  require('./loadBalancer/details/loadBalancer.details.module').name,
   require('./loadBalancer/transformer').name,
   require('./pipeline/stages/bake/huaweicloudBakeStage').name,
   require('./pipeline/stages/findAmi/huaweicloudFindAmiStage').name,
@@ -73,11 +73,11 @@ module(HUAWEICLOUD_MODULE, [
       createSecurityGroupController: 'huaweicloudUpsertSecurityGroupController',
     },
     loadBalancer: {
-      transformer: 'huaweicloudLoadBalancerTransformer',
-      detailsTemplateUrl: require('./loadBalancer/details/details.html'),
-      detailsController: 'huaweicloudLoadBalancerDetailsController',
+      transformer: 'hwcLoadBalancerTransformer',
+      detailsTemplateUrl: require('./loadBalancer/details/loadBalancerDetails.html'),
+      detailsController: 'hwcLoadBalancerDetailsController',
       createLoadBalancerTemplateUrl: require('./loadBalancer/configure/wizard/createWizard.html'),
-      createLoadBalancerController: 'huaweicloudUpsertLoadBalancerController',
+      createLoadBalancerController: 'hwcLoadBalancerUpsertController',
     },
   });
 });

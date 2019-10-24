@@ -5,11 +5,11 @@ const angular = require('angular');
 import { CONFIRMATION_MODAL_SERVICE, LoadBalancerWriter } from '@spinnaker/core';
 
 module.exports = angular
-  .module('spinnaker.loadBalancer.huaweicloud.details.controller', [
+  .module('spinnaker.huaweicloud.loadBalancer.details.controller', [
     require('@uirouter/angularjs').default,
     CONFIRMATION_MODAL_SERVICE,
   ])
-  .controller('huaweicloudLoadBalancerDetailsController', [
+  .controller('hwcLoadBalancerDetailsController', [
     '$scope',
     '$state',
     '$uibModal',
