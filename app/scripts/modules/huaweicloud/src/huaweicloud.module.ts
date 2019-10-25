@@ -35,6 +35,7 @@ module(HUAWEICLOUD_MODULE, [
   require('./pipeline/stages/bake/huaweicloudBakeStage').name,
   require('./pipeline/stages/findAmi/huaweicloudFindAmiStage').name,
   require('./pipeline/stages/cloneServerGroup/huaweicloudCloneServerGroupStage').name,
+  require('./pipeline/stages/destroyAsg/destroyAsgStage.controller').name,
 ]).config(() => {
   CloudProviderRegistry.registerProvider('huaweicloud', {
     name: 'huaweicloud',
