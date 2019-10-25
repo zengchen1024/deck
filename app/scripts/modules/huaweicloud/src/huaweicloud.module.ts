@@ -38,6 +38,7 @@ module(HUAWEICLOUD_MODULE, [
   require('./pipeline/stages/destroyAsg/destroyAsgStage.controller').name,
   require('./pipeline/stages/disableAsg/disableAsgStage.controller').name,
   require('./pipeline/stages/enableAsg/enableAsgStage.controller').name,
+  require('./pipeline/stages/resizeAsg/resizeAsgStage.controller').name,
 ]).config(() => {
   CloudProviderRegistry.registerProvider('huaweicloud', {
     name: 'huaweicloud',
