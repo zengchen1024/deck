@@ -17,7 +17,7 @@ module.exports = angular
 
       if (!$scope.lbState.isBindLoadBalancer) {
         $scope.command.loadBalancers = {};
-        $scope.command.healthCheckGracePeriod = 1;
+        $scope.command.loadBalancers.weight = 1;
       }
 
       function updateLoadBalancers() {
