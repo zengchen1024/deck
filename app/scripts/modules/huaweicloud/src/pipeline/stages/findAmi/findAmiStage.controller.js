@@ -5,7 +5,7 @@ const angular = require('angular');
 import { AccountService, Registry } from '@spinnaker/core';
 
 module.exports = angular
-  .module('spinnaker.huaweicloud.pipeline.stage.findAmiStage', [])
+  .module('spinnaker.huaweicloud.pipeline.stage.findAmiStage.controller', [])
   .config(function() {
     Registry.pipeline.registerStage({
       provides: 'findImage',
@@ -19,7 +19,7 @@ module.exports = angular
       ],
     });
   })
-  .controller('huaweicloudFindAmiStageCtrl', [
+  .controller('hwcFindAmiStageController', [
     '$scope',
     function($scope) {
       let stage = $scope.stage;

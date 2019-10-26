@@ -33,7 +33,7 @@ module(HUAWEICLOUD_MODULE, [
   require('./loadBalancer/details/loadBalancer.details.module').name,
   require('./loadBalancer/transformer').name,
   require('./pipeline/stages/bake/huaweicloudBakeStage').name,
-  require('./pipeline/stages/findAmi/huaweicloudFindAmiStage').name,
+  require('./pipeline/stages/findAmi/findAmiStage.controller').name,
   require('./pipeline/stages/cloneServerGroup/huaweicloudCloneServerGroupStage').name,
   require('./pipeline/stages/destroyAsg/destroyAsgStage.controller').name,
   require('./pipeline/stages/disableAsg/disableAsgStage.controller').name,
